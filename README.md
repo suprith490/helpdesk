@@ -155,7 +155,22 @@ Users page or via `PUT /api/users/{id}`.
 - `docs/PHASES.md` - the 16 build phases with commands and explanations
 - `docs/SPRING-BOOT-COMPARISON.md` - .NET concepts mapped to Spring Boot
 - `docs/AWS-DEPLOYMENT.md` - how to deploy the API to AWS
+- `docs/DEPLOY-VERCEL-RENDER.md` - deploy the frontend to Vercel and the API to Render
 - `docs/RESUME-AND-INTERVIEW.md` - resume bullets and interview Q&A
+- `docs/ER-DIAGRAM.md` - database schema and indexes
+
+## Deployment
+
+The API is a .NET app, so it cannot run on Vercel directly. The recommended
+free setup is a split deployment:
+
+- **Frontend** (`src/HelpDesk.Api/wwwroot`) -> **Vercel** (static hosting)
+- **API** (`HelpDesk.Api`) -> **Render** (Docker web service)
+- Vercel rewrites `/api/*` to the Render API, so the browser uses one origin
+  and no CORS configuration is needed.
+
+Config files included: `Dockerfile`, `render.yaml`, `vercel.json`. Full
+step-by-step instructions are in `docs/DEPLOY-VERCEL-RENDER.md`.
 
 ## Common Errors
 

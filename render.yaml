@@ -1,0 +1,41 @@
+# Render Blueprint for the HelpDesk .NET API.
+#
+# Usage:
+#   1. Push this repository to GitHub.
+#   2. In Render, choose "New" -> "Blueprint" and select this repository.
+#   3. Render reads this file and creates the web service below.
+#
+# The free plan has an ephemeral filesystem, so the SQLite database is
+# recreated (and re-seeded) on every deploy/restart. See
+# docs/DEPLOY-VERCEL-RENDER.md for how to add a persistent disk.
+
+services:
+  - type: web
+    name: helpdesk-api
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: Database__Provider
+        value: Sqlite
+      - key: ConnectionStrings__SqliteConnection
+        value: Data Source=/tmp/helpdesk.db
+      - key: Jwt__Issuer
+        value: HelpDesk
+      - key: Jwt__Audience
+        value: HelpDeskClient
+      - key: Jwt__Key
+        generateValue: true
+      - key: Seed__AdminEmail
+        value: admin@helpdesk.local
+      - key: Seed__AdminPassword
+        value: Admin@123
+      # Replace with your Vercel URL after the frontend is deployed.
+      - key: Cors__AllowedOrigins__0
+        value: https://helpdesk.vercel.app
