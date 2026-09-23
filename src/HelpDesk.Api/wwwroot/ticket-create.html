@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>New Ticket - HelpDesk</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="ticket-create" data-title="Create Ticket">
+    <div class="app">
+        <aside class="sidebar" id="sidebar"></aside>
+        <div class="main">
+            <header class="topbar">
+                <div style="display:flex;align-items:center;gap:12px">
+                    <button class="menu-toggle" onclick="UI.toggleSidebar()">&#9776;</button>
+                    <h2 data-page-title>Create Ticket</h2>
+                </div>
+                <div class="user-area" id="userArea"></div>
+            </header>
+            <main class="content">
+                <div class="panel" style="max-width:760px">
+                    <div class="panel-header"><h3>Report a new issue</h3></div>
+                    <div class="panel-body">
+                        <div id="formError" class="alert alert-error hidden"></div>
+                        <form id="ticketForm">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input class="form-control" type="text" id="title" required maxlength="200" placeholder="Short summary of the issue">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea class="form-control" id="description" required minlength="10" maxlength="4000" placeholder="Describe the problem, what you expected and any error messages (at least 10 characters)."></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="categoryId">Category</label>
+                                    <select class="form-select" id="categoryId" required>
+                                        <option value="">Select a category</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="priority">Priority</label>
+                                    <select class="form-select" id="priority" required>
+                                        <option value="Low">Low</option>
+                                        <option value="Medium" selected>Medium</option>
+                                        <option value="High">High</option>
+                                        <option value="Critical">Critical</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="btn-group mt-2">
+                                <button class="btn" type="submit" id="submitButton">Create ticket</button>
+                                <a class="btn btn-secondary" href="tickets.html">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/ticket-create.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard - HelpDesk</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="dashboard" data-title="Dashboard">
+    <div class="app">
+        <aside class="sidebar" id="sidebar"></aside>
+        <div class="main">
+            <header class="topbar">
+                <div style="display:flex;align-items:center;gap:12px">
+                    <button class="menu-toggle" onclick="UI.toggleSidebar()">&#9776;</button>
+                    <h2 data-page-title>Dashboard</h2>
+                </div>
+                <div class="user-area" id="userArea"></div>
+            </header>
+            <main class="content">
+                <div id="loading" class="spinner"></div>
+                <div id="dashboardBody" class="hidden">
+                    <div class="cards-grid" id="statCards"></div>
+
+                    <div class="grid-two">
+                        <div class="panel">
+                            <div class="panel-header"><h3>Tickets by status</h3></div>
+                            <div class="panel-body" id="statusBars"></div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-header"><h3>Tickets by priority</h3></div>
+                            <div class="panel-body" id="priorityBars"></div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header"><h3>Tickets by category</h3></div>
+                        <div class="panel-body" id="categoryBars"></div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h3>Recent activity</h3>
+                            <a class="btn btn-secondary btn-sm" href="tickets.html">View all tickets</a>
+                        </div>
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Ticket</th>
+                                        <th>Title</th>
+                                        <th>Category</th>
+                                        <th>Priority</th>
+                                        <th>Status</th>
+                                        <th>Updated</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentTickets"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Users - HelpDesk</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="users" data-title="Users">
+    <div class="app">
+        <aside class="sidebar" id="sidebar"></aside>
+        <div class="main">
+            <header class="topbar">
+                <div style="display:flex;align-items:center;gap:12px">
+                    <button class="menu-toggle" onclick="UI.toggleSidebar()">&#9776;</button>
+                    <h2 data-page-title>Users</h2>
+                </div>
+                <div class="user-area" id="userArea"></div>
+            </header>
+            <main class="content">
+                <div class="panel">
+                    <div class="panel-header"><h3>Search and filter</h3></div>
+                    <div class="panel-body">
+                        <form id="filterForm" class="toolbar">
+                            <div class="form-group grow">
+                                <label for="search">Search</label>
+                                <input class="form-control" type="text" id="search" placeholder="Name or email">
+                            </div>
+                            <div class="form-group">
+                                <label for="role">Role</label>
+                                <select class="form-select" id="role">
+                                    <option value="">All</option>
+                                    <option value="Employee">Employee</option>
+                                    <option value="SupportAgent">Support Agent</option>
+                                    <option value="Admin">Administrator</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="active">Status</label>
+                                <select class="form-select" id="active">
+                                    <option value="">All</option>
+                                    <option value="true">Active</option>
+                                    <option value="false">Inactive</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                <div class="btn-group">
+                                    <button class="btn" type="submit">Apply</button>
+                                    <button class="btn btn-secondary" type="button" id="resetButton">Reset</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Department</th>
+                                    <th>Status</th>
+                                    <th>Created</th>
+                                    <th class="actions">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersBody">
+                                <tr><td colspan="7"><div class="spinner"></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination">
+                        <div class="page-info" id="pageInfo"></div>
+                        <div class="page-buttons">
+                            <button class="btn btn-secondary btn-sm" id="prevButton" type="button">Previous</button>
+                            <button class="btn btn-secondary btn-sm" id="nextButton" type="button">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="modal-backdrop hidden" id="userModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Edit user</h3>
+                <button class="btn btn-secondary btn-sm" type="button" id="modalCloseButton">Close</button>
+            </div>
+            <form id="userForm">
+                <div class="modal-body">
+                    <div id="modalError" class="alert alert-error hidden"></div>
+                    <p class="text-muted" id="userIdentity"></p>
+                    <div class="form-group">
+                        <label for="userRole">Role</label>
+                        <select class="form-select" id="userRole" required>
+                            <option value="Employee">Employee</option>
+                            <option value="SupportAgent">Support Agent</option>
+                            <option value="Admin">Administrator</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="userDepartment">Department</label>
+                        <select class="form-select" id="userDepartment">
+                            <option value="">None</option>
+                        </select>
+                    </div>
+                    <div class="checkbox-row">
+                        <input type="checkbox" id="userActive" checked>
+                        <label for="userActive" style="font-weight:400;margin:0">Active account</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" id="modalCancelButton">Cancel</button>
+                    <button class="btn" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/users.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile - HelpDesk</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="profile" data-title="Profile">
+    <div class="app">
+        <aside class="sidebar" id="sidebar"></aside>
+        <div class="main">
+            <header class="topbar">
+                <div style="display:flex;align-items:center;gap:12px">
+                    <button class="menu-toggle" onclick="UI.toggleSidebar()">&#9776;</button>
+                    <h2 data-page-title>Profile</h2>
+                </div>
+                <div class="user-area" id="userArea"></div>
+            </header>
+            <main class="content">
+                <div class="grid-two">
+                    <div class="panel">
+                        <div class="panel-header"><h3>Account information</h3></div>
+                        <div class="panel-body">
+                            <div id="profileError" class="alert alert-error hidden"></div>
+                            <form id="profileForm">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="firstName">First name</label>
+                                        <input class="form-control" type="text" id="firstName" required maxlength="100">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lastName">Last name</label>
+                                        <input class="form-control" type="text" id="lastName" required maxlength="100">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input class="form-control" type="email" id="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="departmentId">Department</label>
+                                    <select class="form-select" id="departmentId">
+                                        <option value="">None</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Role</label>
+                                    <div id="roleDisplay"></div>
+                                    <div class="form-hint">Roles are managed by an administrator.</div>
+                                </div>
+                                <button class="btn" type="submit" id="saveProfileButton">Save changes</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header"><h3>Change password</h3></div>
+                        <div class="panel-body">
+                            <div id="passwordError" class="alert alert-error hidden"></div>
+                            <div id="passwordSuccess" class="alert hidden" style="background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0"></div>
+                            <form id="passwordForm">
+                                <div class="form-group">
+                                    <label for="currentPassword">Current password</label>
+                                    <input class="form-control" type="password" id="currentPassword" required autocomplete="current-password">
+                                </div>
+                                <div class="form-group">
+                                    <label for="newPassword">New password</label>
+                                    <input class="form-control" type="password" id="newPassword" required minlength="6" autocomplete="new-password">
+                                    <div class="form-hint">At least 6 characters.</div>
+                                </div>
+                                <button class="btn" type="submit" id="savePasswordButton">Update password</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ticket Details - HelpDesk</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="ticket-details" data-title="Ticket Details">
+    <div class="app">
+        <aside class="sidebar" id="sidebar"></aside>
+        <div class="main">
+            <header class="topbar">
+                <div style="display:flex;align-items:center;gap:12px">
+                    <button class="menu-toggle" onclick="UI.toggleSidebar()">&#9776;</button>
+                    <h2 data-page-title>Ticket Details</h2>
+                </div>
+                <div class="user-area" id="userArea"></div>
+            </header>
+            <main class="content">
+                <div id="loading" class="spinner"></div>
+                <div id="notFound" class="hidden panel">
+                    <div class="panel-body empty-state">Ticket not found or you do not have access to it.</div>
+                </div>
+                <div id="ticketBody" class="hidden">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div>
+                                <h3 id="ticketNumber" class="mb-0"></h3>
+                                <span class="text-muted" id="ticketTitle"></span>
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn btn-secondary btn-sm" href="tickets.html">Back to tickets</a>
+                                <button class="btn btn-danger btn-sm hidden" id="deleteTicketButton">Delete</button>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <dl class="detail-list">
+                                <dt>Description</dt>
+                                <dd id="ticketDescription"></dd>
+                                <dt>Category</dt>
+                                <dd id="ticketCategory"></dd>
+                                <dt>Priority</dt>
+                                <dd id="ticketPriority"></dd>
+                                <dt>Status</dt>
+                                <dd id="ticketStatus"></dd>
+                                <dt>Created by</dt>
+                                <dd id="ticketCreatedBy"></dd>
+                                <dt>Assigned to</dt>
+                                <dd id="ticketAssignedTo"></dd>
+                                <dt>Created at</dt>
+                                <dd id="ticketCreatedAt"></dd>
+                                <dt>Last updated</dt>
+                                <dd id="ticketUpdatedAt"></dd>
+                                <dt>Resolved at</dt>
+                                <dd id="ticketResolvedAt"></dd>
+                                <dt>Closed at</dt>
+                                <dd id="ticketClosedAt"></dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="panel hidden" id="agentPanel">
+                        <div class="panel-header"><h3>Support actions</h3></div>
+                        <div class="panel-body">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="assignSelect">Assign to</label>
+                                    <select class="form-select" id="assignSelect"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label>&nbsp;</label>
+                                    <div class="btn-group">
+                                        <button class="btn" id="assignButton" type="button">Assign</button>
+                                        <button class="btn btn-secondary" id="unassignButton" type="button">Unassign</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Change status</label>
+                                <div class="btn-group" id="statusButtons"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel hidden" id="editPanel">
+                        <div class="panel-header"><h3>Edit ticket</h3></div>
+                        <div class="panel-body">
+                            <form id="editForm">
+                                <div class="form-group">
+                                    <label for="editTitle">Title</label>
+                                    <input class="form-control" type="text" id="editTitle" required maxlength="200">
+                                </div>
+                                <div class="form-group">
+                                    <label for="editDescription">Description</label>
+                                    <textarea class="form-control" id="editDescription" required minlength="10" maxlength="4000"></textarea>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="editCategory">Category</label>
+                                        <select class="form-select" id="editCategory" required></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editPriority">Priority</label>
+                                        <select class="form-select" id="editPriority" required>
+                                            <option value="Low">Low</option>
+                                            <option value="Medium">Medium</option>
+                                            <option value="High">High</option>
+                                            <option value="Critical">Critical</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button class="btn" type="submit">Save changes</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="grid-two">
+                        <div class="panel">
+                            <div class="panel-header"><h3>Comments</h3></div>
+                            <div class="panel-body">
+                                <div id="commentsList"></div>
+                                <form id="commentForm" class="mt-2">
+                                    <div class="form-group">
+                                        <label for="commentBody">Add a comment</label>
+                                        <textarea class="form-control" id="commentBody" required maxlength="2000" style="min-height:90px"></textarea>
+                                    </div>
+                                    <div class="checkbox-row hidden" id="internalRow">
+                                        <input type="checkbox" id="commentInternal">
+                                        <label for="commentInternal" style="font-weight:400;margin:0">Internal note (agents only)</label>
+                                    </div>
+                                    <button class="btn mt-2" type="submit">Post comment</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-header"><h3>History / audit log</h3></div>
+                            <div class="panel-body">
+                                <div class="timeline" id="historyList"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/ticket-details.js"></script>
+</body>
+</html>

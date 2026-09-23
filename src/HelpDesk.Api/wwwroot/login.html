@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign in - HelpDesk</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <div class="brand">
+                <span class="brand-badge">HD</span>
+                <div>
+                    <h1 class="mb-0">HelpDesk</h1>
+                    <p class="subtitle mb-0">IT Support Ticket Management</p>
+                </div>
+            </div>
+            <h2 style="margin-top:0">Sign in</h2>
+            <p class="subtitle">Enter your credentials to access the portal.</p>
+            <div id="formError" class="alert alert-error hidden"></div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input class="form-control" type="email" id="email" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input class="form-control" type="password" id="password" required autocomplete="current-password">
+                </div>
+                <button class="btn btn-block" type="submit" id="loginButton">Sign in</button>
+            </form>
+            <p class="text-muted mt-2" style="text-align:center">
+                No account? <a href="register.html">Create one</a>
+            </p>
+            <p class="text-muted" style="font-size:12px;text-align:center">
+                Seeded admin: admin@helpdesk.local / Admin@123
+            </p>
+        </div>
+    </div>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

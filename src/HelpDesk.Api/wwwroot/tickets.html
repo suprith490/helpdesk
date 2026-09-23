@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tickets - HelpDesk</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="tickets" data-title="Tickets">
+    <div class="app">
+        <aside class="sidebar" id="sidebar"></aside>
+        <div class="main">
+            <header class="topbar">
+                <div style="display:flex;align-items:center;gap:12px">
+                    <button class="menu-toggle" onclick="UI.toggleSidebar()">&#9776;</button>
+                    <h2 data-page-title>Tickets</h2>
+                </div>
+                <div class="user-area" id="userArea"></div>
+            </header>
+            <main class="content">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3>Search and filter</h3>
+                        <a class="btn" href="ticket-create.html">New Ticket</a>
+                    </div>
+                    <div class="panel-body">
+                        <form id="filterForm" class="toolbar">
+                            <div class="form-group grow">
+                                <label for="search">Search</label>
+                                <input class="form-control" type="text" id="search" placeholder="Title, description or ticket number">
+                            </div>
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select class="form-select" id="status">
+                                    <option value="">All</option>
+                                    <option value="New">New</option>
+                                    <option value="Assigned">Assigned</option>
+                                    <option value="InProgress">In Progress</option>
+                                    <option value="Resolved">Resolved</option>
+                                    <option value="Closed">Closed</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="priority">Priority</label>
+                                <select class="form-select" id="priority">
+                                    <option value="">All</option>
+                                    <option value="Low">Low</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="High">High</option>
+                                    <option value="Critical">Critical</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="categoryId">Category</label>
+                                <select class="form-select" id="categoryId">
+                                    <option value="">All</option>
+                                </select>
+                            </div>
+                            <div class="form-group" id="assignedToMeGroup" style="display:none">
+                                <label>&nbsp;</label>
+                                <div class="checkbox-row">
+                                    <input type="checkbox" id="assignedToMe">
+                                    <label for="assignedToMe" style="font-weight:400;margin:0">Assigned to me</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                <div class="btn-group">
+                                    <button class="btn" type="submit">Apply</button>
+                                    <button class="btn btn-secondary" type="button" id="resetButton">Reset</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th data-sort="ticketNumber">Ticket #</th>
+                                    <th data-sort="title">Title</th>
+                                    <th>Category</th>
+                                    <th data-sort="priority">Priority</th>
+                                    <th data-sort="status">Status</th>
+                                    <th>Assigned To</th>
+                                    <th data-sort="createdAt">Created</th>
+                                    <th data-sort="updatedAt">Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ticketsBody">
+                                <tr><td colspan="8"><div class="spinner"></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination">
+                        <div class="page-info" id="pageInfo"></div>
+                        <div class="page-buttons">
+                            <select class="form-select" id="pageSize" style="width:auto">
+                                <option value="5">5 / page</option>
+                                <option value="10" selected>10 / page</option>
+                                <option value="25">25 / page</option>
+                                <option value="50">50 / page</option>
+                            </select>
+                            <button class="btn btn-secondary btn-sm" id="prevButton" type="button">Previous</button>
+                            <button class="btn btn-secondary btn-sm" id="nextButton" type="button">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/tickets.js"></script>
+</body>
+</html>
