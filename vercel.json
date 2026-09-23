@@ -6,7 +6,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://helpdesk-api.onrender.com/api/:path*"
+      "destination": "https://helpdesk-api-7tok.onrender.com/api/:path*"
     }
   ]
 }
